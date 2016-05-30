@@ -70,7 +70,7 @@ then
    			echo -n ". " 
    			sleep 1 
 		done
-		echo "Download complete."
+		echo "Complete."
 		file="$(ls *${songIndex}.mp3)"
 		rnfile=${file// /_}
         	rnfile=${rnfile//\'/}
