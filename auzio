@@ -60,18 +60,20 @@ then
 	#echo "index: $songIndex"
 	if [ -e mp3/*${songIndex}.mp3 ]
 	then
-		file=$(ls mp3/*${songIndex}.mp3)
-		play_song "$file"
+	file=$(ls mp3/*${songIndex}.mp3)
+	echo "Found song: ${file}"	
+	play_song "$file"
 	else	
 		title=$(echo "$*" | tr '[a-z]' '[A-Z]')
-		echo -n "Finding ${title} . . . "
+		echo -n "Finding ${title} "
 		youtube-dl --extract-audio --audio-format=mp3 -t https://www.youtube.com/watch?v=$songIndex &> /dev/null &
 		while kill -0 $! 2> /dev/null; do
-   			echo -n ". " 
+   			echo -n "#" 
    			sleep 1 
 		done
-		echo "Complete."
+		echo ""
 		file="$(ls *${songIndex}.mp3)"
+		echo "Found song: ${file}"
 		rnfile=${file// /_}
         	rnfile=${rnfile//\'/}
 		mkdir -p mp3
