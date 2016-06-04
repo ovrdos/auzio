@@ -3,7 +3,7 @@
 #kamal.hakim 05-28-16
 
 song="$*"
-
+cat logo
 play_song()
 {
 	echo "Press enter to play!"
@@ -52,15 +52,13 @@ then
 	#check dependencies
 	check_tools
 	song=${song// /+}
+	song="${song}+Lyrics"
 	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 3p)
-	if [ -z $songIndex ]
-	then 
-		songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -n 2|cut -d= -f2|cut -d'"' -f1)
-	fi
-	#echo "index: $songIndex"
-	if [ -e mp3/*${songIndex}.mp3 ]
+	echo "index: $songIndex"
+	filels=$(ls mp3/*${songIndex}.mp3)
+	if [ ! -z "$filels"  ]
 	then
-	file=$(ls mp3/*${songIndex}.mp3)
+	file=${filels}
 	echo "Found song: ${file}"	
 	play_song "$file"
 	else	
