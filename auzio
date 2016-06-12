@@ -55,7 +55,7 @@ then
 	song="${song}+Lyrics"
 	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 3p)
 	#echo "index: $songIndex"
-	file=$(ls mp3/*${songIndex}.mp3)
+	file=$(ls mp3/*${songIndex}.mp3 &> /dev/null &)
 	if [ -z "$file"  ]
 	then
                 title=$(echo "$*" | tr '[a-z]' '[A-Z]')
