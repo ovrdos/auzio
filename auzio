@@ -54,29 +54,26 @@ then
 	song=${song// /+}
 	song="${song}+Lyrics"
 	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 3p)
-	echo "index: $songIndex"
-	filels=$(ls mp3/*${songIndex}.mp3)
-	if [ ! -z "$filels"  ]
+	#echo "index: $songIndex"
+	file=$(ls mp3/*${songIndex}.mp3)
+	if [ -z "$file"  ]
 	then
-	file=${filels}
-	echo "Found song: ${file}"	
-	play_song "$file"
-	else	
-		title=$(echo "$*" | tr '[a-z]' '[A-Z]')
-		echo -n "Finding ${title} "
-		youtube-dl --extract-audio --audio-format=mp3 -t https://www.youtube.com/watch?v=$songIndex &> /dev/null &
-		while kill -0 $! 2> /dev/null; do
-   			echo -n "#" 
-   			sleep 1 
-		done
-		echo ""
-		file="$(ls *${songIndex}.mp3)"
-		echo "Found song: ${file}"
-		rnfile=${file// /_}
-        	rnfile=${rnfile//\'/}
-		mkdir -p mp3
-		mv "$file" "mp3/$rnfile"
-	fi
+                title=$(echo "$*" | tr '[a-z]' '[A-Z]')
+                echo -n "Finding ${title} "
+                youtube-dl --extract-audio --audio-format=mp3 -t https://www.youtube.com/watch?v=$songIndex &> /dev/null &
+                while kill -0 $! 2> /dev/null; do
+                        echo -n "#"
+                        sleep 1
+                done
+                echo ""
+                file="$(ls *${songIndex}.mp3)"
+                echo "Found song: ${file}"
+                rnfile=${file// /_}
+                rnfile=${rnfile//\'/}
+                mkdir -p mp3
+                mv "$file" "mp3/$rnfile"
+        fi
+
 	play_song "./mp3/$rnfile"
 fi
 
