@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+}
+
+div.logo {
+    color: red;
+    font-family: 'Bauhaus 93', sans-serif;
+    font-size: 100px;
+    width: 300px;
+    height: 100px;
+    /*padding: 20px;*/
+
+    position: absolute;
+    top: 23%;
+    left: 50%;
+
+    margin: -70px 0 0 -170px;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+}
+
+input[type=text]#myInp {
+    width: 400px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width .4s ease-in-out;
+    transition: width .4s ease-in-out;
+    margin-left: -69px;
+}

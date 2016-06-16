@@ -1,8 +1,10 @@
 {
-  "name": "Elastic-Beanstalk-Sample-App",
+  "name": "Auzio-App",
   "version": "0.0.1",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.13.4"
+  },
   "scripts": {
     "start": "node app.js"
   }
