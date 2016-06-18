@@ -116,6 +116,7 @@ function returnDuration(data) {
     if (duration != 'ERROR') {
         var timeout = convert_time(duration);
         timeout = (timeout * 1000) - 1700;
+        timeout = Math.min(360000, timeout);
         //timeout = 5000; //for debugging
         window.clearTimeout(vtime);
         vtime = window.setTimeout(function() {
