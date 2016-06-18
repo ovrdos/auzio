@@ -151,8 +151,8 @@ var successCallback = function(data) {
         if (dupe.length>0) {
             console.log("ALREADY PLAYED: " + vtitle);
             window.clearTimeout(vtime);
-            successCallback(data);
-            return;
+            var vtitle = data.items[1].snippet['title'];
+            var vindex = data.items[1].id['videoId'];
         }
         vtitle = vtitle.replace(/\(Lyrics\)/gi,'');
         vtitle = vtitle.replace(/Lyrics/gi,'');
