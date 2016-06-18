@@ -15,6 +15,7 @@ var SEARCH_BASE = 'https://www.googleapis.com/youtube/v3/search';
 var BASE_KEY = "AIzaSyA-_35pvz44BvBsUNIKV8Kgs4GCEneQ4a4";
 var vtime = null;
 var videoHistory = [];
+var currentSong = "";
 
 if (screen.width <= 800) {
     window.location = "../mobile.html";
@@ -23,6 +24,7 @@ if (screen.width <= 800) {
 var searchQuery = function(event, query) {
 
     var keypress = event ? event : window.event;
+    keypress.stopPropagation();
 
     if (event === null || keypress.keyCode === 13) {
 
@@ -151,8 +153,7 @@ var successCallback = function(data) {
         if (dupe.length>0) {
             console.log("ALREADY PLAYED: " + vtitle);
             window.clearTimeout(vtime);
-            var vtitle = data.items[1].snippet['title'];
-            var vindex = data.items[1].id['videoId'];
+            getNextSong(vindex);
         }
         vtitle = vtitle.replace(/\(Lyrics\)/gi,'');
         vtitle = vtitle.replace(/Lyrics/gi,'');
@@ -165,11 +166,13 @@ var successCallback = function(data) {
         vtitle = vtitle.replace(/]/gi,'');
         $('div#search_result').html(PRE+"<span id=\"srtitle\">"+vtitle+"</span>");
         $('iframe#front_player').attr('src', VIDEO_BASE + vindex + QS_DATA);
+        currentSong = vindex;
         videoHistory.push({index:vindex,title:vtitle});
         console.log(videoHistory);
         console.log(vtitle);
         window.setTimeout(showVisual, 2000);
         $("#myInp").trigger("blur");
+        $("#myInp").val("");
         getDurationAndNextSong(vindex);
     }
 };
@@ -198,11 +201,11 @@ function sendAjaxRequest(options, successCallback) {
 }
 
 var showVisual = function() {
-    $('#bars').show();
+    $('#bars').fadeIn(1000);
 };
 
 var hideVisual = function() {
-    $('#bars').hide();
+    $('#bars').fadeOut(1000);
 };
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -212,3 +215,25 @@ var hideVisual = function() {
 
 ga('create', 'UA-17692414-10', 'auto');
 ga('send', 'pageview');
+
+function audioController(event) {
+
+    var e = event || window.event;
+
+    if (e.keyCode === 13) {
+        getNextSong(currentSong);
+    }
+
+    if (e.keyCode === 32) {
+        if ($('iframe#front_player').attr('src') === "") {
+            $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;t=1m40s");
+            showVisual();
+        } else {
+            $('iframe#front_player').attr('src', '');
+            hideVisual();
+        }
+    }
+
+}
+
+window.addEventListener('keypress',function(){audioController(event)})
