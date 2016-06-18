@@ -7,7 +7,7 @@ window.downloadAudio = function(query) {
 
 var BASE_FINDERS = " lyrics -kids -kidzbop ";
 var PRE = "<span class=\"pre status\">Now playing...</span><br>";
-var POST = "<span class=\"pre\"><br><br>controls:<br>[enter] - Next<br>[space] - Pause<br>[space][space] - Restart</span><br>";
+var POST = "<span class=\"pre\"><br><br>controls:<br>[enter] - Next<br>[space] - Pause</span><br>";
 var QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0";
 var API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM";
 var VIDEO_BASE = 'https://www.youtube.com/embed/';
@@ -17,6 +17,7 @@ var BASE_KEY = "AIzaSyA-_35pvz44BvBsUNIKV8Kgs4GCEneQ4a4";
 var vtime = new Timer(null, 1000000000);
 var videoHistory = [];
 var currentSong = "";
+var currentDuration = 0;
 
 if (screen.width <= 800) {
     window.location = "../mobile.html";
@@ -124,6 +125,7 @@ function returnDuration(data) {
         timeout = Math.min(360000, timeout);
         vtime.stop();
         vtime = new Timer(function() {
+            currentDuration = timeout;
             getNextSong(vindex);
         },timeout);
     }
@@ -234,7 +236,7 @@ function audioController(event) {
 
     if (e.keyCode === 32) {
         if ($('iframe#front_player').attr('src') === "") {
-            $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;t=1m40s");
+            $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;start=" + (currentDuration));
             showVisual();
             vtime.resume();
         } else {
@@ -250,6 +252,7 @@ window.addEventListener('keypress',function(){audioController(event)});
 
 function Timer(callback, delay) {
     var timerId, start, remaining = delay;
+    var total = (remaining);
 
     this.stop = function() {
         window.clearTimeout(timerId);
@@ -259,6 +262,8 @@ function Timer(callback, delay) {
         $('span.status').html("Paused...");
         window.clearTimeout(timerId);
         remaining -= new Date() - start;
+        console.log('remaining:' + remaining);
+        currentDuration = Math.floor((total-remaining)/1000);
     };
 
     this.resume = function() {
