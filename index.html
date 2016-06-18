@@ -1,16 +1,44 @@
 <html>
   <head>
+      <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
       <link rel="stylesheet" type="text/css" href="media/flash.css">
       <link href="fonts/Bauhaus%2093" rel="stylesheet">
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
       <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+      <script type="application/javascript" src="js/search.min.js"></script>
       <title>auz.io - auzio</title>
   </head>
   <body>
         <div class="logo">
             auzio
-            <input id="myInp" type="text" name="search" placeholder="">
+            <input value="" id="myInp" type="text" name="search" placeholder="artist - song" onkeypress="searchQuery(this.value)"/>
+            <div>
+                <div id="bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+            <div id="search_result"></div>
+        </div>
+
+        <div>
+            <div style="overflow:hidden;height:2px;width:2px;max-width:100%;max-height:100%;">
+                <div id="youtube_canvas" style="height:100%;width:100%;max-width:100%">
+                    <iframe id="front_player" style="height:100%;width:100%;max-width:100%;border:0;" frameborder="0" src=""></iframe>
+                </div>
+            </div>
         </div>
   </body>
 </html>

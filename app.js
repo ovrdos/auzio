@@ -2,16 +2,17 @@ var port = process.env.PORT || 3000,
     http = require('http'),
     fs = require('fs'),
     express = require('express'),
-    app = express(),
-    html = fs.readFileSync('index.html');
+    app = express();
+
+var VIDEO_BASE = 'https://www.youtube.com/watch?v=';
+var id = '-Z8RyzSVGOs';
+var url = VIDEO_BASE + id;
 
 var log = function(entry) {
     fs.appendFileSync('/tmp/sample-app.log', new Date().toISOString() + ' - ' + entry + '\n');
 };
 
 var oneDay = 86400000;
-
-//app.use(express.compress());
 
 app.use(express.static(__dirname + '/', { maxAge: oneDay }));
 app.use(express.static(__dirname + '/js', { maxAge: oneDay }));
