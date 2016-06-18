@@ -13,6 +13,11 @@ var QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load
 //        .pipe(fs.createWriteStream('vide.mp4'));
 //}
 
+if (screen.width > 800) {
+    debugger;
+    window.location = "../mobile.html";
+}
+
 
 var searchQuery = function(event, query) {
 
