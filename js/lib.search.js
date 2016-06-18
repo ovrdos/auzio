@@ -6,14 +6,15 @@ window.downloadAudio = function(query) {
 }
 
 var BASE_FINDERS = " lyrics -kids -kidzbop ";
-var PRE = "<span class=\"pre\">Now playing...</span><br>";
+var PRE = "<span class=\"pre status\">Now playing...</span><br>";
+var POST = "<span class=\"pre\"><br><br>controls:<br>[enter] - Next<br>[space] - Pause<br>[space][space] - Restart</span><br>";
 var QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0";
 var API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM";
 var VIDEO_BASE = 'https://www.youtube.com/embed/';
 var META_BASE = 'https://www.googleapis.com/youtube/v3/videos';
 var SEARCH_BASE = 'https://www.googleapis.com/youtube/v3/search';
 var BASE_KEY = "AIzaSyA-_35pvz44BvBsUNIKV8Kgs4GCEneQ4a4";
-var vtime = null;
+var vtime = new Timer(null, 1000000000);
 var videoHistory = [];
 var currentSong = "";
 
@@ -28,8 +29,10 @@ var searchQuery = function(event, query) {
 
     if (event === null || keypress.keyCode === 13) {
 
+        if (query.trim() === '') return;
+
         hideVisual();
-        window.clearTimeout(vtime);
+        vtime.stop();
 
         var options = [];
         options.url = SEARCH_BASE;
@@ -108,7 +111,7 @@ function getNextSong(vindex) {
         type: 'video',
         relatedToVideoId: vindex
     };
-    window.clearTimeout(vtime);
+    vtime.stop();
     sendAjaxRequest(options, playNextSong);
 }
 
@@ -119,9 +122,8 @@ function returnDuration(data) {
         var timeout = convert_time(duration);
         timeout = (timeout * 1000) - 1700;
         timeout = Math.min(360000, timeout);
-        //timeout = 5000; //for debugging
-        window.clearTimeout(vtime);
-        vtime = window.setTimeout(function() {
+        vtime.stop();
+        vtime = new Timer(function() {
             getNextSong(vindex);
         },timeout);
     }
@@ -152,7 +154,7 @@ var successCallback = function(data) {
         });
         if (dupe.length>0) {
             console.log("ALREADY PLAYED: " + vtitle);
-            window.clearTimeout(vtime);
+            vtime.stop();
             getNextSong(vindex);
         }
         vtitle = vtitle.replace(/\(Lyrics\)/gi,'');
@@ -162,9 +164,15 @@ var successCallback = function(data) {
         vtitle = vtitle.replace(/\[/gi,'');
         vtitle = vtitle.replace(/audio/gi,'');
         vtitle = vtitle.replace(/video/gi,'');
+        vtitle = vtitle.replace(/\)/gi,'');
+        vtitle = vtitle.replace(/\(/gi,'');
         vtitle = vtitle.replace(/official/gi,'');
         vtitle = vtitle.replace(/]/gi,'');
-        $('div#search_result').html(PRE+"<span id=\"srtitle\">"+vtitle+"</span>");
+        vtitle = vtitle.replace(/wmv/gi,'');
+        vtitle = vtitle.replace(/mp3/gi,'');
+        vtitle = vtitle.replace(/\./gi,'');
+        vtitle = vtitle.trim();
+        $('div#search_result').html(PRE+"<span id=\"srtitle\">"+vtitle+"</span>"+POST);
         $('iframe#front_player').attr('src', VIDEO_BASE + vindex + QS_DATA);
         currentSong = vindex;
         videoHistory.push({index:vindex,title:vtitle});
@@ -228,12 +236,39 @@ function audioController(event) {
         if ($('iframe#front_player').attr('src') === "") {
             $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;t=1m40s");
             showVisual();
+            vtime.resume();
         } else {
             $('iframe#front_player').attr('src', '');
             hideVisual();
+            vtime.pause();
         }
     }
 
 }
 
-window.addEventListener('keypress',function(){audioController(event)})
+window.addEventListener('keypress',function(){audioController(event)});
+
+function Timer(callback, delay) {
+    var timerId, start, remaining = delay;
+
+    this.stop = function() {
+        window.clearTimeout(timerId);
+    };
+
+    this.pause = function() {
+        $('span.status').html("Paused...");
+        window.clearTimeout(timerId);
+        remaining -= new Date() - start;
+    };
+
+    this.resume = function() {
+        $('span.status').html("Now playing...");
+        start = new Date();
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(callback, remaining);
+    };
+
+    this.resume();
+
+    return timerId;
+}
