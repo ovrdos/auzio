@@ -14,7 +14,7 @@ div.logo {
     top: 23%;
     left: 50%;
 
-    margin: -70px 0 0 -170px;
+    margin: -70px 0 -13px -170px;
 
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
@@ -36,6 +36,7 @@ input[type=text]#myInp {
     -webkit-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
     margin-left: -69px;
+    margin-top: -13px;
 }
 
 div#search_result {
@@ -55,11 +56,7 @@ div#search_result {
     font-family: sans-serif;
 }
 
-#srtitle {
-    margin-top: 12px;
-}
-
-#youtube_canvas img {
+#canvas img {
     max-width:none!important;
     background:none!important
 }
