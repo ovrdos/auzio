@@ -6,6 +6,7 @@ div.logo {
 
     background: url('alogo.png') no-repeat center;
     background-size: 260px;
+    color: red;
     font-size: 100px;
     width: 300px;
     height: 100px;
@@ -42,10 +43,10 @@ input[type=text]#myInp {
 
 div#search_result {
     width: 400px;
-    padding: 12px 20px 12px 40px;
+    padding: 5px 20px 12px 40px;
     -webkit-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
-    margin-left: -100px;
+    margin-left: -88px;
     font-size: 20px;
     line-height: 23px;
     font-family: 'Raleway', sans-serif;
