@@ -6,13 +6,13 @@
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
       <link rel="icon" href="/favicon.ico" type="image/x-icon">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-      <script type="application/javascript" src="lib/search.min.js"></script>
+      <script type="application/javascript" src="js/search.min.js"></script>
       <title>auz.io - auzio</title>
   </head>
   <body>
         <div class="logo">
             auzio
-            <input value="" id="myInp" type="text" name="search" placeholder="artist - song" onfocus="$(this).val('')" onkeypress="searchQuery(this.value)"/>
+            <input id="myInp" type="text" name="search" placeholder="artist - song" onfocus="$(this).val('')" onkeypress="searchQuery(event, this.value)"/>
             <div>
                 <div id="bars">
                     <div class="bar"></div>
