@@ -231,16 +231,18 @@ ga('send', 'pageview');
 
 function audioController(event) {
 
-    if ($('#front_player').attr('src')==='') return;
+
 
     var e = event ? event : window.event;
     e.stopPropagation();
 
     if (e.keyCode||e.charCode === 13) {
+        if ($('#front_player').attr('src')==='') return;
         getNextSong(currentSong);
     }
 
     if (e.keyCode||e.charCode === 32) {
+        if ($('#front_player').attr('src')==='') return;
         if ($('iframe#front_player').attr('src') === "") {
             $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;start=" + (currentDuration));
             showVisual();
