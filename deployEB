@@ -14,5 +14,7 @@ git push
 wait $!
 
 if [ -z "$1" ] exit 0
+
+
 eb deploy
 
