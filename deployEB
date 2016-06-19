@@ -9,7 +9,7 @@ wait $!
 mv search.min.js js/search.min.js
 
 git add -A
-git commit -am "Adding auzio update."
+git commit -am "Adding auzio update. ${1}"
 git push
 wait $!
 
