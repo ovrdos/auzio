@@ -231,13 +231,16 @@ ga('send', 'pageview');
 
 function audioController(event) {
 
-    var e = event || window.event;
+    if ($('#front_player').attr('src')==='') return;
 
-    if (e.keyCode === 13) {
+    var e = event ? event : window.event;
+    e.stopPropagation();
+
+    if (e.keyCode||e.charCode === 13) {
         getNextSong(currentSong);
     }
 
-    if (e.keyCode === 32) {
+    if (e.keyCode||e.charCode === 32) {
         if ($('iframe#front_player').attr('src') === "") {
             $('iframe#front_player').attr('src', VIDEO_BASE + currentSong + QS_DATA + "&amp;start=" + (currentDuration));
             showVisual();
@@ -251,7 +254,12 @@ function audioController(event) {
 
 }
 
-window.addEventListener('keypress',function(){audioController(event)});
+//window.addEventListener('keypress',function(){audioController()});
+
+$(document).keypress(function(event) {
+    audioController(event);
+    event.preventDefault();
+});
 
 function Timer(callback, delay) {
     var timerId, start, remaining = delay;
