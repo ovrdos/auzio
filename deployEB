@@ -12,5 +12,7 @@ git add -A
 git commit -am "Adding auzio update."
 git push
 wait $!
+
+exit 0
 eb deploy
 
