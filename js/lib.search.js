@@ -247,6 +247,7 @@ function audioController(event) {
             vtime.resume();
         } else {
             hideVisual();
+            $('iframe#front_player').attr('src','');
             vtime.pause();
         }
     }
