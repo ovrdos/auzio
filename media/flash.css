@@ -67,11 +67,12 @@ div#search_result {
     font-size: 20px;
     line-height: 23px;
     font-family: 'Raleway', sans-serif;
+    text-transform: capitalize;
 }
 
 .pre {
     color: #7f7e7e;
-    font-size: 14px;
+    font-size: 12px;
     font-family: sans-serif;
 }
 
