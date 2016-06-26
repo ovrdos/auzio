@@ -16,10 +16,10 @@ app.use(express.static(__dirname + '/', { maxAge: oneDay }));
 app.use(express.static(__dirname + '/js', { maxAge: oneDay }));
 app.use(express.static(__dirname + '/media', { maxAge: oneDay }));
 
-https.createServer({
-    key: privateKey,
-    cert: certificate
-}, app).listen(port);
+//https.createServer({
+//    key: privateKey,
+//    cert: certificate
+//}, app).listen(port);
 
 app.listen(3000);
 
