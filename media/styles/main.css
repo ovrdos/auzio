@@ -1,0 +1,31 @@
+.musicIcons {
+  display: inline-block;
+  background-size: 260px;
+  color: red;
+  font-size: 100px;
+  width: 300px;
+  height: 100px;
+  position: absolute;
+  top: 42%;
+  left: 54%;
+  margin: 30px 0 -13px -170px;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
+.rewind {
+  width: 25px;
+  height: 25px;
+}
+
+.play {
+  width: 25px;
+  height: 25px;
+}
+
+.fastForward {
+  width: 25px;
+  height: 25px;
+}

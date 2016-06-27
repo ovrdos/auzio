@@ -1,55 +1,67 @@
 <html>
-  <head>
-      <meta http-equiv="expires" content="-1">
-      <meta http-equiv="Pragma" content="no-cache" />
-      <meta http-equiv="Cache-Control" content="no-cache" />
-      <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
-      <link rel="stylesheet" type="text/css" href="media/flash.css">
-      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-      <link rel="icon" href="/favicon.ico" type="image/x-icon">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-      <script type="application/javascript" src="js/search.min.js"></script>
-      <title>auz.io - auzio</title>
-  </head>
-  <body>
-        <div class="logo">
-            <input id="myInp" type="text" name="search" placeholder="artist - song" onkeypress="searchQuery(event, this.value)"/>
-            <div>
-                <div id="bars">
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                    <div class="bar"></div>
-                </div>
-            </div>
 
-            <div id="search_result"></div>
+<head>
+  <meta http-equiv="expires" content="-1">
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Cache-Control" content="no-cache" />
+  <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="media/flash.css">
+  <link rel="stylesheet" type="text/css" href="media/styles/main.css">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script type="application/javascript" src="js/search.min.js"></script>
+  <title>auz.io - auzio</title>
+</head>
+
+<body>
+  <div id="containiner">
+    <div class="logo">
+      <input id="myInp" type="text" name="search" placeholder="artist - song" onkeypress="searchQuery(event, this.value)" />
+      <div>
+        <div id="bars">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
         </div>
+      </div>
 
-        <div>
-            <div style="overflow:hidden;height:2px;width:2px;max-width:100%;max-height:100%;">
-                <div id="canvas" style="height:100%;width:100%;max-width:100%">
-                    <div id="front_player" style="height:100%;width:100%;max-width:100%;border:0;" border="0" src=""></div>
-                    <div id="right_player" style="height:100%;width:100%;max-width:100%;border:0;" border="0" src=""></div>
-                </div>
-            </div>
+      <div id="search_result"></div>
+    </div>
+
+    <div>
+      <div style="overflow:hidden;height:2px;width:2px;max-width:100%;max-height:100%;">
+        <div id="canvas" style="height:100%;width:100%;max-width:100%">
+          <div id="front_player" style="height:100%;width:100%;max-width:100%;border:0;" border="0" src=""></div>
+          <div id="right_player" style="height:100%;width:100%;max-width:100%;border:0;" border="0" src=""></div>
         </div>
+      </div>
+    </div>
 
-        <script>
+    <div class="musicIcons">
+      <img class="rewind" src="media/svg/rewind.svg" />
+      <img class="play" src="media/svg/play.svg" />
+      <img class="fastForward" src="media/svg/fast-forward.svg" onclick="playNextSong()"/>
+    </div>
 
-        </script>
+  </div>
 
-  </body>
+  <script>
+  </script>
+
+</body>
+
 </html>
