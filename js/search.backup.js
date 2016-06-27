@@ -161,6 +161,12 @@ hideVisual = function() {
     $("#bars").fadeOut(500)
 };
 
+document.addEventListener('keypress', function(event) {
+    var e = event ? event : window.event;
+    console.log(e.keyCode);
+    "" !== currentSong && ((13 === e.keyCode || 13 === e.charCode) && getNextSong(currentSong), (32 === e.keyCode || 32 === e.charCode) && (1 != front_player.getPlayerState() ? (front_player.playVideo(), showVisual(), vtime.resume()) : (front_player.pauseVideo(), hideVisual(), vtime.pause())))
+});
+
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
