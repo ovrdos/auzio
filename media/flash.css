@@ -2,6 +2,11 @@ body {
     margin: 0;
 }
 
+div.musicIcons {
+    display: none;
+    /*#until-working;*/
+}
+
 div.logo {
 
     background: url('alogo.png') no-repeat center;
@@ -38,7 +43,6 @@ button.button {
     float: left;
     line-height: 13px;
     cursor: pointer;
-    margin: 0px 0px 0px 2px;
 }
 
 input[type=text]#myInp {
