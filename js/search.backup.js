@@ -139,6 +139,7 @@ getDurationAndNextSong = function(e) {
 
 successCallback = function(e) {
     if (0 == e.items.length) return $("div#search_result").html(PRE), void $("span.status").html("Coudn't find that one...");
+
     if (e) {
         var t = e.items[0].snippet.title,
             n = e.items[0].id.videoId,
@@ -150,7 +151,8 @@ successCallback = function(e) {
             title: t
         }), console.log(videoHistory), console.log(t), window.setTimeout(showVisual, 2e3), $("#myInp").trigger("blur"), $("#myInp").val(""), getDurationAndNextSong(n)
     }
-    front_player.playVideo();
+
+    setTimeout(function(){front_player.playVideo()}, 2000);
 },
 
 showVisual = function() {
