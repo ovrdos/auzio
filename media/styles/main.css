@@ -13,14 +13,23 @@
 .rewind {
   width: 25px;
   height: 25px;
+  margin-right: 2px;
 }
 
 .play {
   width: 25px;
   height: 25px;
+  margin-right: 2px;
+}
+
+.pause {
+  width: 25px;
+  height: 25px;
+  margin-right: 2px;
 }
 
 .fastForward {
   width: 25px;
   height: 25px;
+  margin-right: 2px;
 }

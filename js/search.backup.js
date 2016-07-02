@@ -91,12 +91,24 @@ function Timer(e, t) {
 var tag = document.createElement("script");
 tag.src = "https://www.youtube.com/player_api";
 
+var playSong = function() {
+    front_player.playVideo();
+    showVisual();
+    vtime.resume();
+}
+
+var pauseSong = function() {
+    front_player.pauseVideo();
+    hideVisual();
+    vtime.pause();
+}
+
 var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     PRE = '<span class="pre status">Now playing...</span><br>',
-    POST = '<span class="pre"><br><img class="play" src="media/svg/play.svg" onclick="front_player.playVideo();"/><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
+    POST = '<span class="pre"><br><img class="pause" src="media/svg/pause.svg" onclick="pauseSong()"/><img class="play" src="media/svg/play.svg" onclick="playSong()"/><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
     QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0",
     API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM",
     VIDEO_BASE = "https://www.youtube.com/embed/",
