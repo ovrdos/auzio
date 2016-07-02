@@ -96,7 +96,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     PRE = '<span class="pre status">Now playing...</span><br>',
-    POST = '<span class="pre"><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
+    POST = '<span class="pre"><br><img class="play" src="media/svg/play.svg" onclick="front_player.playVideo();"/><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
     QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0",
     API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM",
     VIDEO_BASE = "https://www.youtube.com/embed/",
