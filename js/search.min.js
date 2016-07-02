@@ -95,8 +95,6 @@ var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
-    PRE = '<span class="pre status">Now playing...</span><br>',
-    POST = '<span class="pre"><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
     QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0",
     API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM",
     VIDEO_BASE = "https://www.youtube.com/embed/",
@@ -108,6 +106,9 @@ var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     currentSong = "",
     currentDuration = 0,
     quePlayer = "div#front_player";
+
+    var PRE = '<span class="pre status">Now playing...</span><br>',
+    var POST = '<span class="pre"><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
 
     if (screen.width <= 800 && window.location.href.indexOf("mobile.html")===-1 ) {
         window.location = "../mobile.html";
