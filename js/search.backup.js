@@ -164,7 +164,7 @@ successCallback = function(e) {
         }), console.log(videoHistory), console.log(t), window.setTimeout(showVisual, 2e3), $("#myInp").trigger("blur"), $("#myInp").val(""), getDurationAndNextSong(n)
     }
 
-    setTimeout(function(){front_player.playVideo()}, 2000);
+    setTimeout(function(){front_player.playVideo()}, 4000);
 },
 
 showVisual = function() {
