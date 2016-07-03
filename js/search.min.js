@@ -108,7 +108,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     PRE = '<span class="pre status">Now playing...</span><br>',
-    POST = '<span class="pre"><br><img class="pause" src="media/svg/pause.svg" onclick="pauseSong()"/><img class="play" src="media/svg/play.svg" onclick="playSong()"/><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
+    POST = '<span class="pre"><br><img class="pause" src="media/svg/pause.svg" onclick="pauseSong()"/><img class="play" src="media/svg/play.svg" onclick="playSong()"/><img class="next" src="media/svg/next.svg" onclick="getNextSong(currentSong)"/><br><br>controls:<br>[enter] -> next song<br>[space] -> <span class="pauser">pause</span></span><br>',
     QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0",
     API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM",
     VIDEO_BASE = "https://www.youtube.com/embed/",
@@ -158,13 +158,13 @@ successCallback = function(e) {
             o = $.grep(videoHistory, function(e) {
                 return e.index == n
             });
-        o.length > 1 && (console.log("ALREADY PLAYED: " + t), t = e.items[1].snippet.title, n = e.items[1].id.videoId), t = t.replace(/with lyrics/gi, ""), t = t.replace(/\(lyrics\)/gi, ""), t = t.replace(/lyrics/gi, ""), t = t.replace(/lyric/gi, ""), t = t.replace(/w\//gi, ""), t = t.replace(/\+/gi, " "), t = t.replace(/\[/gi, ""), t = t.replace(/audio/gi, ""), t = t.replace(/video/gi, ""), t = t.replace(/\)/gi, ""), t = t.replace(/\(/gi, ""), t = t.replace(/official/gi, ""), t = t.replace(/]/gi, ""), t = t.replace(/wmv/gi, ""), t = t.replace(/mp3/gi, ""), t = t.replace(/\./gi, ""), t = t.trim(), $("div#search_result").html(PRE + '<span id="srtitle">' + t + "</span>" + POST), front_player.loadVideoById(n), currentSong = n, videoHistory.push({
+        o.length > 0 && (console.log("ALREADY PLAYED: " + t), t = e.items[1].snippet.title, n = e.items[1].id.videoId), t = t.replace(/with lyrics/gi, ""), t = t.replace(/\(lyrics\)/gi, ""), t = t.replace(/lyrics/gi, ""), t = t.replace(/lyric/gi, ""), t = t.replace(/w\//gi, ""), t = t.replace(/\+/gi, " "), t = t.replace(/\[/gi, ""), t = t.replace(/audio/gi, ""), t = t.replace(/video/gi, ""), t = t.replace(/\)/gi, ""), t = t.replace(/\(/gi, ""), t = t.replace(/official/gi, ""), t = t.replace(/]/gi, ""), t = t.replace(/wmv/gi, ""), t = t.replace(/mp3/gi, ""), t = t.replace(/\./gi, ""), t = t.trim(), $("div#search_result").html(PRE + '<span id="srtitle">' + t + "</span>" + POST), front_player.loadVideoById(n), currentSong = n, videoHistory.push({
             index: n,
             title: t
         }), console.log(videoHistory), console.log(t), window.setTimeout(showVisual, 2e3), $("#myInp").trigger("blur"), $("#myInp").val(""), getDurationAndNextSong(n)
     }
 
-    setTimeout(function(){front_player.playVideo()}, 4000);
+    setTimeout(function(){front_player.playVideo()}, 2000);
 },
 
 showVisual = function() {
