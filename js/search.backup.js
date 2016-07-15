@@ -25,7 +25,7 @@ function onYouTubePlayerAPIReady() {
 
 var playNextSong = function(e) {
     if (e) {
-        var t = getRandom(0, 5);
+        var t = getRandom(0, 15);
         e.random = t, e.items[t] && successCallback(e)
     }
 }
@@ -35,9 +35,9 @@ var getNextSong = function(e) {
         part: "snippet",
         key: BASE_KEY,
         api_key: API_KEY,
-        maxResults: 6,
+        maxResults: 16,
         type: "video",
-        relatedToVideoId: e
+        relatedToVideoId: e.videoId ? e.videoId : e
     }, vtime.stop(), sendAjaxRequest(options, playNextSong)
 }
 
@@ -118,7 +118,7 @@ var getSong = function(e) {
         maxResults: 1,
         type: "video",
         videoEmbeddable: "true",
-        id: e
+        id: e.videoId ? e.videoId : e
     }, sendAjaxRequest(o, successCallback)
 }
 
@@ -165,7 +165,7 @@ getDurationAndNextSong = function(e) {
         key: BASE_KEY,
         api_key: API_KEY,
         type: "video",
-        id: e
+        id: e.videoId ? e.videoId : e
     }, sendAjaxRequest(options, returnDuration)
 },
 
@@ -175,7 +175,7 @@ successCallback = function(e) {
         var t = e.items[0].snippet.title,
             n = e.items[0].id ? e.items[0].id : e.items[0].id.videoId,
             o = $.grep(videoHistory, function(e) {
-                return e.index == n
+                return e.index == n.videoId ? n.videoId : n
             });
         o.length > 0 && (console.log("ALREADY PLAYED: " + t), t = e.items[1].snippet.title, n = e.items[1].id.videoId), t = t.replace(/with lyrics/gi, ""), t = t.replace(/\(lyrics\)/gi, ""), t = t.replace(/lyrics/gi, ""), t = t.replace(/lyric/gi, ""), t = t.replace(/w\//gi, ""), t = t.replace(/\+/gi, " "), t = t.replace(/\[/gi, ""), t = t.replace(/audio/gi, ""), t = t.replace(/video/gi, ""), t = t.replace(/\)/gi, ""), t = t.replace(/\(/gi, ""), t = t.replace(/official/gi, ""), t = t.replace(/]/gi, ""), t = t.replace(/wmv/gi, ""), t = t.replace(/mp3/gi, ""), t = t.replace(/\./gi, ""), t = t.trim(), $("div#search_result").html(PRE + '<span id="srtitle">' + t + "</span>" + POST), front_player.loadVideoById(n), currentSong = n, videoHistory.push({
             index: n,
