@@ -138,6 +138,7 @@ var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     videoHistory = [],
     currentSong = "",
     currentDuration = 0,
+    isPaused = false,
     quePlayer = "div#front_player";
 
 var searchQuery = function(e, t) {
@@ -195,7 +196,7 @@ hideVisual = function() {
 document.addEventListener('keypress', function(event) {
     var e = event ? event : window.event;
     console.log(e.keyCode);
-    "" !== currentSong && ((13 === e.keyCode || 13 === e.charCode) && getNextSong(currentSong), (32 === e.keyCode || 32 === e.charCode) && (1 != front_player.getPlayerState() ? (front_player.playVideo(), showVisual(), vtime.resume()) : (front_player.pauseVideo(), hideVisual(), vtime.pause())))
+    "" !== currentSong && ((13 === e.keyCode || 13 === e.charCode) && getNextSong(currentSong), (32 === e.keyCode || 32 === e.charCode) && (1 != front_player.getPlayerState() ? (isPaused = false, front_player.playVideo(), showVisual(), vtime.resume()) : (isPaused = true, front_player.pauseVideo(), hideVisual(), vtime.pause())))
 });
 
 
@@ -218,3 +219,10 @@ var playDeeplink = function() {
         getSong(vid);
     }
 }
+
+setInterval(function(){
+    if (front_player && typeof front_player.getPlayerState === 'function' && front_player.getPlayerState() === 1 && typeof front_player.playVideo === 'function') {
+        console.log("player check...");
+        front_player.playVideo();
+    }
+}, 500);
