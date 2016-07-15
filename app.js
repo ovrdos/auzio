@@ -12,6 +12,10 @@ var oneDay = 86400000;
 app.use(express.static(__dirname + '/', { maxAge: oneDay }));
 app.use(express.static(__dirname + '/js', { maxAge: oneDay }));
 app.use(express.static(__dirname + '/media', { maxAge: oneDay }));
+app.use(express.static(__dirname + '/:tagId', { maxAge: oneDay }));
+app.get('/:tagId', function(req, res) {
+    res.sendFile(__dirname + '/index.html');
+});
 
 app.listen(port);
 

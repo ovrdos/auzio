@@ -13,23 +13,29 @@
 .rewind {
   width: 25px;
   height: 25px;
-  margin-right: 2px;
+  margin-right: 3px;
 }
 
 .play {
   width: 25px;
   height: 25px;
-  margin-right: 2px;
+  margin-right: 3px;
 }
 
 .pause {
   width: 25px;
   height: 25px;
-  margin-right: 2px;
+  margin-right: 3px;
 }
 
 .next {
   width: 25px;
   height: 25px;
-  margin-right: 2px;
+  margin-right: 3px;
+}
+
+.share {
+  width: 24px;
+  height: 24px;
+  margin-right: 3px;
 }

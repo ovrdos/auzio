@@ -103,12 +103,31 @@ var pauseSong = function() {
     vtime.pause();
 }
 
+var shareSong = function(currentSong) {
+    var song = currentSong.videoId ? currentSong.videoId : currentSong;
+    $( "#myInp" ).val('http://' + window.location.host + '/' +song);
+    $( "#myInp" ).select();
+}
+
+var getSong = function(e) {
+    var o = [];
+    o.url = META_BASE, o.type = "GET", o.data = {
+        part: "snippet, contentDetails",
+        key: BASE_KEY,
+        api_key: API_KEY,
+        maxResults: 1,
+        type: "video",
+        videoEmbeddable: "true",
+        id: e
+    }, sendAjaxRequest(o, successCallback)
+}
+
 var firstScriptTag = document.getElementsByTagName("script")[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
     PRE = '<span class="pre status">Now playing...</span><br>',
-    POST = '<span class="pre"><br><img class="pause" src="media/svg/pause.svg" onclick="pauseSong()"/><img class="play" src="media/svg/play.svg" onclick="playSong()"/><img class="next" src="media/svg/next.svg" onclick="getNextSong(currentSong)"/></span><br>',
+    POST = '<span class="pre"><br><img class="pause" src="media/svg/pause.svg" onclick="pauseSong()"/><img class="play" src="media/svg/play.svg" onclick="playSong()"/><img class="next" src="media/svg/next.svg" onclick="getNextSong(currentSong)"/><img class="share" src="media/svg/share.svg" onclick="shareSong(currentSong)"/></span><br>',
     QS_DATA = "?hl=en&amp;autoplay=1&amp;cc_load_policy=0&amp;loop=1&amp;iv_load_policy=0&amp;fs=0&amp;showinfo=0",
     API_KEY = "38RZbrBm78K0K7O5IOuJrH4db7-UFhtKpHWBzmFM",
     VIDEO_BASE = "https://www.youtube.com/embed/",
@@ -123,7 +142,8 @@ var front_player, BASE_FINDERS = " lyrics -kids -kidzbop ",
 
 var searchQuery = function(e, t) {
 var n = e ? e : window.event;
-if (n.stopPropagation(), null === e || 13 === n.keyCode) {
+if (n) n.stopPropagation();
+        if (null === e || 13 === n.keyCode) {
     if ("" === t.trim()) return void(currentSong && getNextSong(currentSong));
     hideVisual(), vtime.stop();
     var o = [];
@@ -150,11 +170,10 @@ getDurationAndNextSong = function(e) {
 },
 
 successCallback = function(e) {
-    if (0 == e.items.length) return $("div#search_result").html(PRE), void $("span.status").html("Coudn't find that one...");
-
+    //if (0 == e.items.length) return $("div#search_result").html(PRE), void $("span.status").html("Coudn't find that one...");
     if (e) {
         var t = e.items[0].snippet.title,
-            n = e.items[0].id.videoId,
+            n = e.items[0].id ? e.items[0].id : e.items[0].id.videoId,
             o = $.grep(videoHistory, function(e) {
                 return e.index == n
             });
@@ -163,8 +182,6 @@ successCallback = function(e) {
             title: t
         }), console.log(videoHistory), console.log(t), window.setTimeout(showVisual, 2e3), $("#myInp").trigger("blur"), $("#myInp").val(""), getDurationAndNextSong(n)
     }
-
-    setTimeout(function(){front_player.playVideo()}, 2000);
 },
 
 showVisual = function() {
@@ -189,3 +206,15 @@ document.addEventListener('keypress', function(event) {
 
 ga('create', 'UA-17692414-10', 'auto');
 ga('send', 'pageview');
+
+
+var playDeeplink = function() {
+    var link = document.location.pathname.split("/");
+    if (link.length > 1) {
+        var vid = link[1];
+    }
+
+    if (vid) {
+        getSong(vid);
+    }
+}
