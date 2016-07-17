@@ -2,7 +2,7 @@
   width: 75px;
   height: 0;
   position: absolute;
-  top: 70%;
+  top: 73%;
   left: 44%;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -20,6 +20,7 @@
   width: 25px;
   height: 25px;
   margin-right: 3px;
+  margin-top: 4px;
 }
 
 .pause {
