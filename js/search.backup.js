@@ -221,7 +221,7 @@ var playDeeplink = function() {
 }
 
 setInterval(function(){
-    if (front_player.getPlayerState() === 1) {
+    if (true) {
         front_player.playVideo();
     }
 }, 500);
