@@ -221,8 +221,7 @@ var playDeeplink = function() {
 }
 
 setInterval(function(){
-    if (front_player && typeof front_player.getPlayerState === 'function' && front_player.getPlayerState() === 1 && typeof front_player.playVideo === 'function') {
-        console.log("player check...");
+    if (front_player.getPlayerState() === 1) {
         front_player.playVideo();
     }
 }, 500);
