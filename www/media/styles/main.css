@@ -40,3 +40,7 @@
   height: 24px;
   margin-right: 3px;
 }
+
+input#myInp {
+    width: 80%;
+}

@@ -2,6 +2,21 @@
       xmlns:fb="http://ogp.me/ns/fb#">
 
 <head>
+  <!--
+       Customize this policy to fit your own app's needs. For more guidance, see:
+           https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+       Some notes:
+           * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+           * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+           * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+               * Enable inline JS: add 'unsafe-inline' to default-src
+       -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" type="text/css" href="media/styles/index.css">
+
   <meta http-equiv="expires" content="-1">
   <meta http-equiv="Pragma" content="no-cache" />
   <meta property="og:image" content="http://auz.io/media/alogo.png" />
@@ -16,11 +31,16 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
   <script type="application/javascript" src="js/search.min.js"></script>
-  <title>auz.io - auzio</title>
+  <title>auz.io</title>
+
 </head>
 
 <body>
-  <div id="container">
+  <div id="container" class="app">
+    <div id="deviceready" class="blink">
+      <p class="event listening">Connecting to Device</p>
+      <p class="event received">Device is Ready</p>
+    </div>
     <div class="logo">
       <input id="myInp" type="text" name="search" placeholder="artist - song" onkeypress="searchQuery(event, this.value)" />
       <div>
@@ -67,6 +87,9 @@
     playDeeplink();
   }, 2000);
 </script>
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
 
 </body>
 
