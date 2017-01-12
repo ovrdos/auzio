@@ -11,7 +11,14 @@
            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
                * Enable inline JS: add 'unsafe-inline' to default-src
        -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval' 'unsafe-inline';
+    font-src https://fonts.gstatic.com;
+    frame-src https://www.youtube.com;
+    connect-src https://www.googleapis.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://code.jquery.com;
+    media-src *; img-src 'self' data: content: https://www.google-analytics.com;;
+    script-src https://s.ytimg.com https://www.google-analytics.com https://www.youtube.com https://code.jquery.com https://ajax.googleapis.com 'self' 'unsafe-inline' 'unsafe-eval';">
+
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -22,9 +29,9 @@
   <meta property="og:image" content="http://auz.io/media/alogo.png" />
   <meta http-equiv="Cache-Control" content="no-cache" />
   <link href='https://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="media/flash.css">
+  <link rel="stylesheet" type="text/css" href="media/styles/flash.css">
   <link rel="stylesheet" type="text/css" href="media/styles/main.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
@@ -37,10 +44,6 @@
 
 <body>
   <div id="container" class="app">
-    <div id="deviceready" class="blink">
-      <p class="event listening">Connecting to Device</p>
-      <p class="event received">Device is Ready</p>
-    </div>
     <div class="logo">
       <input id="myInp" type="text" name="search" placeholder="artist - song" onkeypress="searchQuery(event, this.value)" />
       <div>
@@ -81,7 +84,10 @@
   <div id="dialog" style="display: none;">
     <input id="text-dialog" type="text" value="" />
   </div>
-
+  <div id="deviceready" class="blink" style="visibility: hidden;">
+    <p class="event listening">Connecting to Device</p>
+    <p class="event received">Device is Ready</p>
+  </div>
 <script>
   setTimeout(function() {
     playDeeplink();

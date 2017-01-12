@@ -1,5 +1,7 @@
-body {
+html, body {
     margin: 0;
+    height: 100%;
+    overflow: hidden
 }
 
 .wpanel {
@@ -11,23 +13,21 @@ body {
 }
 
 div.logo {
-    background: url('alogo.png') no-repeat center;
+    background: url(../alogo.png) no-repeat center;
     background-size: 260px;
+    background-position-y: 6px;
     color: red;
     font-size: 100px;
     width: 300px;
     height: 100px;
-
     position: absolute;
-    top: 15%;
-    left: 50%;
-
-    margin: 30px 0 -13px -170px;
-
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */
+    top: -70%;
+    left: 64%;
+    margin: 40px 0 -13px -170px;
+    /* -webkit-user-select: none; */
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 button.button {
@@ -48,21 +48,21 @@ button.button {
 }
 
 input[type=text]#myInp {
-    width: 400px;
+    width: 100%;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 18px;
-    background-color: white;
-    background-image: url('searchicon.png');
+    /* background-color: white; */
+    background-image: url(../searchicon.png);
     background-position: 10px 12px;
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
     -webkit-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
-    margin-left: -50px;
-    margin-top: 110px;
     z-index: 5;
+    /* align-content: center; */
+    margin-top: 88px;
 }
 
 div#search_result {
@@ -71,7 +71,7 @@ div#search_result {
     -webkit-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
     margin-left: -88px;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 23px;
     font-family: 'Raleway', sans-serif;
     text-transform: capitalize;
@@ -104,7 +104,7 @@ h1 {
     left: 143px;
     margin: -45px 0 0 -20px;
     position: absolute;
-    top: 50px;
+    top: 45px;
     display: none;
 }
 
