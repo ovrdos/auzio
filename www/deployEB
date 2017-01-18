@@ -1,0 +1,22 @@
+git checkout nodejs
+
+cp js/search.min.js js/search.backup.js
+wait $!
+
+# minifying a JS file (e.g. ready.js -> ready.min.js)
+# curl -X POST -s --data-urlencode 'input@js/search.min.js' https://javascript-minifier.com/raw > search.min.js
+# wait $!
+# mv search.min.js js/search.min.js
+
+git add -A
+git commit -am "Adding auzio update: ${@}"
+git push
+wait $!
+
+if [ -z "$1" ];
+then
+exit 0
+fi
+
+eb deploy
+
