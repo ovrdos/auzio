@@ -41,6 +41,13 @@ check_tools()
                 brew install mpg123
                 wait $!
         fi
+	ffmpeg="$(which ffmpeg)"
+        if [ -z $ffmpeg ]
+        then
+                echo "Installing FFMPEG..."
+                brew install ffmpeg
+                wait $!
+        fi
 }
 
 re="^.* - .*$"
@@ -53,7 +60,7 @@ then
 	check_tools
 	song=${song// /+}
 	song="${song}+Lyrics"
-	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 3p)
+	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 1p)
 	#echo "index: $songIndex"
 	file=$(ls mp3/*${songIndex}.mp3 &> /dev/null &)
 	if [ -z "$file"  ]
