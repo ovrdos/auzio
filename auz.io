@@ -66,7 +66,7 @@ then
 	if [ -z "$file"  ]
 	then
                 title=$(echo "$*" | tr '[a-z]' '[A-Z]')
-                echo -n "Finding ${title} "
+                echo -n "Loading: ${title} "
                 youtube-dl --extract-audio --audio-format=mp3 -t https://www.youtube.com/watch?v=$songIndex &> /dev/null &
                 while kill -0 $! 2> /dev/null; do
                         echo -n "#"
