@@ -1,4 +1,0 @@
-./build-platforms
-wait ${!}
-cd ..
-cordova run android --device

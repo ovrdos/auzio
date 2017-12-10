@@ -1,6 +1,0 @@
-cp -R ../www ../platforms/ios/
-cp -R ../www ../platforms/android/
-./update-android
-./update-ios
-cd ..
-cordova prepare --verbose
