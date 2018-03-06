@@ -49,23 +49,29 @@ check_tools()
                 wait $!
         fi
 }
-
+#check dependencies
+check_tools
+rx="..........."
 re="^.* - .*$"
-if [[ -z "${song}" ||! "$song" =~ $re ]]
+if [[ -z "${song}" ]]
 then
 	echo "to run enter: ./auzio Artist - Song"
-	exit 0
-	else
-	#check dependencies
-	check_tools
+	read song
+fi	
 	song=${song// /+}
-	song="${song}+Lyrics"
-	songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 1p)
+	if [[ "$song" =~ $rx ]]
+	then
+		echo "Looking for index: " ${song}		
+		songIndex=${song}
+	else
+		song="${song} + Lyrics"
+		songIndex=$(curl -s https://www.youtube.com/results?search_query="${song}"|grep "/watch?v="|cut -d/ -f2|head -4|cut -d= -f2|cut -d'"' -f1|sed -n 1p)
+	fi
 	#echo "index: $songIndex"
 	file=$(ls mp3/*${songIndex}.mp3 &> /dev/null &)
 	if [ -z "$file"  ]
 	then
-                title=$(echo "$*" | tr '[a-z]' '[A-Z]')
+                title=$(echo "$song" | tr '[a-z]' '[A-Z]')
                 echo -n "Loading: ${title} "
                 youtube-dl --extract-audio --audio-format=mp3 -t https://www.youtube.com/watch?v=$songIndex &> /dev/null &
                 while kill -0 $! 2> /dev/null; do
@@ -80,8 +86,5 @@ then
                 mkdir -p mp3
                 mv "$file" "mp3/$rnfile"
         fi
-
 	play_song "./mp3/$rnfile"
-fi
-
 exit 0
