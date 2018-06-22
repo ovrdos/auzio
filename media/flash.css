@@ -48,7 +48,7 @@ button.button {
 }
 
 input[type=text]#myInp {
-    width: 300px;
+    width: 350px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
