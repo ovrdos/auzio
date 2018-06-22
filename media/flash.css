@@ -48,7 +48,7 @@ button.button {
 }
 
 input[type=text]#myInp {
-    width: 400px;
+    width: 300px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -60,7 +60,6 @@ input[type=text]#myInp {
     padding: 12px 20px 12px 40px;
     -webkit-transition: width .4s ease-in-out;
     transition: width .4s ease-in-out;
-    margin-left: -50px;
     margin-top: 110px;
     z-index: 5;
 }
