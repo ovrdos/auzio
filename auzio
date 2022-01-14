@@ -6,14 +6,12 @@
 
 song="$1"
 dfreq="44100"
-freq="${2:=$dfreq}"
-cat logo
-
 if [[ -z "${song}" ]]
 then
-	echo "to run enter: ./auzio Song"
+	echo "To run enter command: auzio Song"
 	exit 0
 else
+	freq="${2:=$dfreq}"
 	#check_tools
 	song=${song// /+}
 	song="${song}"
@@ -21,10 +19,10 @@ else
 	title=${title/+/-}
         echo -n "Finding: ${title}"
         echo "... "
-	youtube-dl --extract-audio -o ${song}.mp3 "ytsearch:${song}+official+lyrics"
+	youtube-dl --extract-audio -w -o ${song}.mp3 "ytsearch:${song}+official+lyrics"
 	ffmpeg -i ${song}.* -vn -acodec libmp3lame -ac 2 -qscale:a 4 -ar ${freq} "auzio-${title}.mp3"
 	wait $!
-	mv "auzio-${title}.mp3" /var/www/html/auzio/
+	mv -n "auzio-${title}.mp3" /var/www/html/auzio/
 	if [ -f ${song}.opus ]
         then
 	rm ${song}.opus
