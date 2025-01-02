@@ -3,7 +3,6 @@
 #AUZIO by Kamal Hakim
 #finds songs based on a artist - song query and downloads and converts it
 #kamal.hakim 05-28-16
-
 song="$*"
 cat logo
 play_song()
@@ -29,11 +28,11 @@ check_tools()
                 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
                 wait $!
         fi
-	ytdl="$(which youtube-dl)"
+	ytdl="$(which yt-dlp)"
         if [ -z $ytdl ]
         then
                 echo "Installing YTDL..."
-                brew install youtube-dl
+                brew install yt-dlp
                 wait $!
         fi
         mpg="$(which mpg123)"
@@ -53,7 +52,7 @@ check_tools()
 }
 
 re="^.* - .*$"
-if [[ -z "${song}" ||! "$song" =~ $re ]]
+if [[ -z "${song}" ]]
 then
 	echo "to run enter: ./auzio Artist - Song"
 	exit 0
@@ -65,8 +64,13 @@ else
 	title=${title/+/-}
         echo -n "Finding: ${title}"
         echo "... "
-	youtube-dl --extract-audio -o ${song}.mp3 "ytsearch:${song}+official+lyrics"
-	ffmpeg -i ${song}.* -vn -acodec libmp3lame -ac 2 -qscale:a 4 -ar 48000 "Auzio-${title}.mp3"
+        ref="^...........$"
+        if [[ ${song} =~ $ref ]];then
+        yt-dlp "https://www.youtube.com/watch?v=${song}" --max-downloads 11 -x --audio-format mp3 -o "${song}.mp3"
+	else
+        yt-dlp "ytsearch:'${song}+official+lyrics'" --max-downloads 11 -x --audio-format mp3 -o "${song}.mp3"	
+	fi
+        ffmpeg -i ${song}.* -vn -acodec libmp3lame -ac 2 -qscale:a 4 -ar 48000 "Auzio-${title}.mp3"
 	wait $!
 	if [ -f ${song}.opus ]
         then
